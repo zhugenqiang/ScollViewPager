@@ -123,12 +123,12 @@ public class ScrollDotView extends RelativeLayout  {
 		}
 		vpAdapter=new ScrollAdapter(views);
 		viewpager.setAdapter(vpAdapter);
-		InitDots();
+		initDots();
 	}
 	/*
 	 * 开始轮播
 	 */
-	public void StartLoop()
+	public void startLoop()
 	{
 		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 		// 当Activity显示出来后，每两秒钟切换一次图片显示
@@ -196,7 +196,7 @@ public class ScrollDotView extends RelativeLayout  {
 	/*
 	 * 初始化底部小点
 	 */
-	private void InitDots() {
+	private void initDots() {
 		
 		for(int i=0;i<views.size();i++)
 		{

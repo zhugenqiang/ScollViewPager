@@ -47,7 +47,7 @@ public class ScrollTestActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		scrollview.StartLoop();
+		scrollview.startLoop();
 	}
 
 }
