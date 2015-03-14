@@ -215,13 +215,13 @@ public class ScrollDotView extends RelativeLayout  {
 	public int getLoopTime() {
 		return loopTime;
 	}
-	public void setLoopTime(int loopTime) {
-		this.loopTime = loopTime;
+	public void setLoopTime(int looptime) {
+		this.loopTime = looptime;
 	}
 	public Boolean getIsshowclose() {
 		return isShowClose;
 	}
-	public void setIsshowclose(Boolean isshowclose) {
+	public void setIsShowClose(Boolean isshowclose) {
 		this.isShowClose = isshowclose;
 		if(!isshowclose)
 		{

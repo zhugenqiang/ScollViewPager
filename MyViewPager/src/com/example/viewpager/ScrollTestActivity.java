@@ -41,7 +41,7 @@ public class ScrollTestActivity extends Activity {
 		scrollView=(ScrollDotView) findViewById(R.id.view_scroll);
 		scrollView.setBackImages(imageViews);
 		scrollView.setLoopTime(2);
-		scrollView.setIsshowclose(true);
+		scrollView.setIsShowClose(true);
 	}
 	@Override
 	protected void onStart() {
