@@ -1,3 +1,4 @@
+
 package com.example.viewpager;
 
 import java.util.ArrayList;
@@ -9,13 +10,10 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ScrollDotView;
 import android.widget.ImageView.ScaleType;
-
 public class ScrollTestActivity extends Activity {
 	private ScrollDotView scrollview=null;
 	private int[] imageResId;

@@ -17,12 +17,18 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+/** 
+* @ClassName: ScrollDotView 
+* @Description:轮播控件组件类 
+* @author 朱根强
+* @date 2015年3月14日 上午11:31:54 
+*  
+*/
 public class ScrollDotView extends RelativeLayout  {
 
 	private ViewPager viewpager=null;
@@ -37,7 +43,10 @@ public class ScrollDotView extends RelativeLayout  {
 	private ScheduledExecutorService scheduledExecutorService;
 	private int oldPosition = 0;
 	private Boolean isshowclose=true;
-	//轮播时间（秒)
+	
+	/** 
+	* @Fields loopTime : 轮播周期（秒) 
+	*/ 
 	private int loopTime=2;
 	public ScrollDotView(Context context)
 	{

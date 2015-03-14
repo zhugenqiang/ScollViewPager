@@ -6,6 +6,14 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.support.v4.view.ViewPager;
+
+/** 
+* @ClassName: ScrollAdapter 
+* @Description: 轮播控件数据适配类
+* @author 朱根强
+* @date 2015年3月14日 上午11:30:39 
+*  
+*/
 public class ScrollAdapter extends PagerAdapter{
 
 	//界面列表
