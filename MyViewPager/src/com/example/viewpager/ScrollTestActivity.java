@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.ScrollDotView;
 import android.widget.ImageView.ScaleType;
 public class ScrollTestActivity extends Activity {
-	private ScrollDotView scrollview=null;
+	private ScrollDotView scrollView=null;
 	private int[] imageResId;
 	public ScrollTestActivity() {
 		// TODO Auto-generated constructor stub
@@ -38,16 +38,16 @@ public class ScrollTestActivity extends Activity {
 		  imageView.setScaleType(ScaleType.CENTER_CROP);
 		  imageViews.add(imageView);
 		}
-		scrollview=(ScrollDotView) findViewById(R.id.view_scroll);
-		scrollview.setBackImages(imageViews);
-		scrollview.setLoopTime(2);
-		scrollview.setIsshowclose(true);
+		scrollView=(ScrollDotView) findViewById(R.id.view_scroll);
+		scrollView.setBackImages(imageViews);
+		scrollView.setLoopTime(2);
+		scrollView.setIsshowclose(true);
 	}
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		scrollview.startLoop();
+		scrollView.startLoop();
 	}
 
 }

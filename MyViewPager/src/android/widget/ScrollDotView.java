@@ -31,18 +31,18 @@ import android.widget.RelativeLayout;
 */
 public class ScrollDotView extends RelativeLayout  {
 
-	private ViewPager viewpager=null;
-	private LinearLayout linearlayout=null;
-	private LinearLayout linearlayout1=null;
-	private ImageButton  imgclose=null;
+	private ViewPager viewPager=null;
+	private LinearLayout linearLayout=null;
+	private LinearLayout linearLayout1=null;
+	private ImageButton  imgClose=null;
 	//图片的那些点
-	private List<View> dots=new ArrayList<View>();
+	private List<View> dotImages=new ArrayList<View>();
 	private ScrollAdapter vpAdapter;
-	private int currentindex=0;
-	private ArrayList<View> views;
+	private int currentIndex=0;
+	private ArrayList<View> imageViews;
 	private ScheduledExecutorService scheduledExecutorService;
 	private int oldPosition = 0;
-	private Boolean isshowclose=true;
+	private Boolean isShowClose=true;
 	
 	/** 
 	* @Fields loopTime : 轮播周期（秒) 
@@ -54,56 +54,56 @@ public class ScrollDotView extends RelativeLayout  {
 	}
 	public ScrollDotView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		viewpager=new ViewPager(context);
-		viewpager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
-		viewpager.setOnPageChangeListener(new ScrollPageChangeListener());
-		this.addView(viewpager);
-		imgclose=new ImageButton(context);
-		imgclose.setBackgroundResource(R.drawable.close);
-		LayoutParams imgparms=new LayoutParams(30,30);
-		imgparms.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-		imgparms.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-		imgparms.topMargin=5;
-		imgparms.rightMargin=5;
-		imgclose.setLayoutParams(imgparms);
+		viewPager=new ViewPager(context);
+		viewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+		viewPager.setOnPageChangeListener(new ScrollPageChangeListener());
+		this.addView(viewPager);
+		imgClose=new ImageButton(context);
+		imgClose.setBackgroundResource(R.drawable.close);
+		LayoutParams imgParms=new LayoutParams(30,30);
+		imgParms.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+		imgParms.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		imgParms.topMargin=5;
+		imgParms.rightMargin=5;
+		imgClose.setLayoutParams(imgParms);
 		
-		this.addView(imgclose);
-		imgclose.setOnClickListener(new View.OnClickListener() {
+		this.addView(imgClose);
+		imgClose.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				RelativeLayout llLayout=((RelativeLayout)imgclose.getParent());
+				RelativeLayout llLayout=((RelativeLayout)imgClose.getParent());
 				llLayout.removeAllViews();
-				ViewGroup group=(ViewGroup) llLayout.getParent();
-				if(group!=null)
+				ViewGroup viewGroup=(ViewGroup) llLayout.getParent();
+				if(viewGroup!=null)
 				{
-				  group.removeView(llLayout);
+				  viewGroup.removeView(llLayout);
 				}
 			}
 		});
-		linearlayout=new LinearLayout(context);
+		linearLayout=new LinearLayout(context);
 		LayoutParams parms=new LayoutParams(LayoutParams.MATCH_PARENT,35);
 		parms.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-		linearlayout.setLayoutParams(parms);
-		linearlayout.setGravity(Gravity.CENTER);
-		linearlayout.setBackgroundColor(Color.parseColor("#33000000"));
-		linearlayout.setOrientation(LinearLayout.VERTICAL);
+		linearLayout.setLayoutParams(parms);
+		linearLayout.setGravity(Gravity.CENTER);
+		linearLayout.setBackgroundColor(Color.parseColor("#33000000"));
+		linearLayout.setOrientation(LinearLayout.VERTICAL);
 		
 		
-		linearlayout1=new LinearLayout(context);
-		LayoutParams parms1=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		linearLayout1=new LinearLayout(context);
+		LayoutParams layoutParms1=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 		parms.topMargin=3;
-		linearlayout1.setLayoutParams(parms1);
-		linearlayout1.setGravity(Gravity.CENTER);
-		linearlayout.addView(linearlayout1);
-		addView(linearlayout);
+		linearLayout1.setLayoutParams(layoutParms1);
+		linearLayout1.setGravity(Gravity.CENTER);
+		linearLayout.addView(linearLayout1);
+		addView(linearLayout);
 		
 		// TODO Auto-generated constructor stub
 	}
 	// 切换当前显示的图片
 		private Handler handler = new Handler() {
 			public void handleMessage(android.os.Message msg) {
-				viewpager.setCurrentItem(currentindex);// 切换当前显示的图片
+				viewPager.setCurrentItem(currentIndex);// 切换当前显示的图片
 				
 				
 			};
@@ -112,17 +112,17 @@ public class ScrollDotView extends RelativeLayout  {
 	 * 设置图片
 	 */
 	public void setBackImages(List<ImageView> images) {
-		views = new ArrayList<View>();  
+		imageViews = new ArrayList<View>();  
 		LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
 	    LinearLayout.LayoutParams.WRAP_CONTENT);
 		for(int i=0;i<images.size();i++)
 		{
 		  ImageView img=images.get(i);
 		  img.setLayoutParams(mParams);
-		  views.add(img);
+		  imageViews.add(img);
 		}
-		vpAdapter=new ScrollAdapter(views);
-		viewpager.setAdapter(vpAdapter);
+		vpAdapter=new ScrollAdapter(imageViews);
+		viewPager.setAdapter(vpAdapter);
 		initDots();
 	}
 	/*
@@ -143,9 +143,9 @@ public class ScrollDotView extends RelativeLayout  {
 	private class ScrollTask implements Runnable {
 
 		public void run() {
-			synchronized (viewpager) {
+			synchronized (viewPager) {
 			
-				currentindex = (currentindex + 1) % views.size();
+				currentIndex = (currentIndex + 1) % imageViews.size();
 				handler.obtainMessage().sendToTarget(); // 通过Handler切换图片
 			}
 		}
@@ -165,10 +165,10 @@ public class ScrollDotView extends RelativeLayout  {
 		 * position: Position index of the new selected page.
 		 */
 		public void onPageSelected(int position) {
-			currentindex = position;
+			currentIndex = position;
 			
-			dots.get(oldPosition).setBackgroundResource(R.drawable.dot_normal);
-			dots.get(position).setBackgroundResource(R.drawable.dot_focused);
+			dotImages.get(oldPosition).setBackgroundResource(R.drawable.dot_normal);
+			dotImages.get(position).setBackgroundResource(R.drawable.dot_focused);
 			oldPosition = position;
 		}
 
@@ -185,12 +185,12 @@ public class ScrollDotView extends RelativeLayout  {
      */
     private void setCurDot(int positon)
     {
-		if (positon < 0 || positon > views.size() - 1 || currentindex == positon) {
+		if (positon < 0 || positon > imageViews.size() - 1 || currentIndex == positon) {
 			return;
 		}
-		currentindex = positon;
-		dots.get(oldPosition).setBackgroundResource(R.drawable.dot_normal);
-		dots.get(positon).setBackgroundResource(R.drawable.dot_focused);
+		currentIndex = positon;
+		dotImages.get(oldPosition).setBackgroundResource(R.drawable.dot_normal);
+		dotImages.get(positon).setBackgroundResource(R.drawable.dot_focused);
 		oldPosition = positon;
     }
 	/*
@@ -198,18 +198,18 @@ public class ScrollDotView extends RelativeLayout  {
 	 */
 	private void initDots() {
 		
-		for(int i=0;i<views.size();i++)
+		for(int i=0;i<imageViews.size();i++)
 		{
 			View dot=new ImageView(this.getContext());
 			LinearLayout.LayoutParams parms=new LinearLayout.LayoutParams(10, 10);
 			parms.leftMargin=2;
 			dot.setLayoutParams(parms);
 			dot.setBackgroundResource(R.drawable.dot_normal);
-			dots.add(dot);
-			linearlayout1.addView(dot);
+			dotImages.add(dot);
+			linearLayout1.addView(dot);
 		
 		}
-		dots.get(currentindex).setBackgroundResource(R.drawable.dot_focused);
+		dotImages.get(currentIndex).setBackgroundResource(R.drawable.dot_focused);
 		
 	}
 	public int getLoopTime() {
@@ -219,13 +219,13 @@ public class ScrollDotView extends RelativeLayout  {
 		this.loopTime = loopTime;
 	}
 	public Boolean getIsshowclose() {
-		return isshowclose;
+		return isShowClose;
 	}
 	public void setIsshowclose(Boolean isshowclose) {
-		this.isshowclose = isshowclose;
+		this.isShowClose = isshowclose;
 		if(!isshowclose)
 		{
-			imgclose.setVisibility(View.GONE);
+			imgClose.setVisibility(View.GONE);
 		}
 	}
 	
